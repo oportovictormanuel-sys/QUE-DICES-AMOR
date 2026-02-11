@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Juego del Amor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffc0cb, #ffe6f0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .hearts {
+      font-size: 40px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    .hearts:hover {
+      transform: scale(1.3);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      margin: 8px;
+    }
+
+    .yes {
+      background: #ff4da6;
+      color: white;
+    }
+
+    .yes:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Mini Juego del Amor 💖</h1>
+    <p id="instructions">Mi amor Marcela, encuentra 5 corazones para descubrir mi pregunta secreta...</p>
+
+    <div id="game"></div>
+
+    <p id="score">Corazones encontrados: 0/5</p>
+
+    <div id="final" class="hidden">
+      <h2>💌 Mi amor Marcela...</h2>
+      <p style="font-size:20px; font-weight:bold;">
+        ¿Quieres ser mi San Valentín? 💘
+      </p>
+
+      <button class="yes" onclick="alert('Sabía que dirías que sí 😍 Te amo ❤️')">Sí 💕</button>
+      <button class="yes" onclick="alert('Entonces ya es oficial 💖')">Obvio sí 😘</button>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+    const game = document.getElementById("game");
+    const scoreText = document.getElementById("score");
+    const final = document.getElementById("final");
+
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.innerHTML = "❤️";
+      heart.className = "hearts";
+
+      heart.onclick = () => {
+        if (score >= 5) return;
+        score++;
+        scoreText.innerText = `Corazones encontrados: ${score}/5`;
+        heart.style.visibility = "hidden";
+
+        if (score >= 5) {
+          final.classList.remove("hidden");
+        }
+      };
+
+      game.appendChild(heart);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      createHeart();
+    }
+  </script>
+</body>
+</html>
